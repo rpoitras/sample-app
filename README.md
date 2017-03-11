@@ -17,7 +17,7 @@ If you want to run the Spring Server:
 
 It starts up on http://localhost:8093/sample-app. This isn't necessary, but I left it in as it is the server I am using.
 
-## Hot Module Replacement
+## Troubles with Hot Module Replacement
 
 Make changes to some JSX while webpack dev-server is running. Changes are detected. App recompiles. 
 Browser does not update. Changes are reflected if the browser is refreshed.
