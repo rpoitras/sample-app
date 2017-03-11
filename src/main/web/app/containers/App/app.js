@@ -97,9 +97,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.object,
-  router: PropTypes.object,
-  location: PropTypes.object
+  children: PropTypes.object
 }
 
 export default withRouter(App)
