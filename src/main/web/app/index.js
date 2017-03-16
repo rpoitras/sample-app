@@ -4,7 +4,7 @@ import 'babel-polyfill'
 import ReactDOM from 'react-dom'
 import React from 'react'
 import { useRouterHistory } from 'react-router'
-import { createHistory } from 'history'
+import { createBrowserHistory } from 'history'
 import { createStore, applyMiddleware, compose } from 'redux'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -22,7 +22,7 @@ injectTapEventPlugin()
 const initialState = getDefaultInitialState()
 
 // Set up the router history off the base application name.
-const browserHistory = useRouterHistory(createHistory)({ basename: '/sample-app' })
+const browserHistory = useRouterHistory(createBrowserHistory)({ basename: '/sample-app' })
 const historyRouterMiddleware = routerMiddleware(browserHistory)
 
 // Build up the store
