@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import { useRouterHistory } from 'react-router'
 import { createHistory } from 'history'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { AppContainer } from 'react-hot-loader'
@@ -21,22 +21,20 @@ injectTapEventPlugin()
 // Initial Redux Store state is pulled from each reducer's initial state definition.
 const initialState = getDefaultInitialState()
 
-// Store development enhancers
-const enhancers = []
-if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
-  }
-}
-
 // Set up the router history off the base application name.
 const browserHistory = useRouterHistory(createHistory)({ basename: '/sample-app' })
 const historyRouterMiddleware = routerMiddleware(browserHistory)
 
-// Build up the store.
-const createStoreWithMiddleware = applyMiddleware(historyRouterMiddleware)(createStore)
-const store = createStoreWithMiddleware(rootReducer, initialState, ...enhancers)
+// Build up the store
+let composeEnhancers = null
+if (process.env.NODE_ENV === 'development') {
+  composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+} else {
+  composeEnhancers = compose
+}
+const store = createStore(rootReducer, initialState, composeEnhancers(
+  applyMiddleware(historyRouterMiddleware)
+))
 const history = syncHistoryWithStore(browserHistory, store)
 
 function renderApp (RootComponent) {
