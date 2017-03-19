@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import reactLogo from 'assets/react.png'
 import springLogo from 'assets/springLogo.png'

@@ -4,27 +4,30 @@ import About from '../routes/About'
 import PageOne from '../routes/PageOne'
 import NotFound from '../routes/NotFound'
 
-const routes = {
-  path: '/',
-  component: App,
-  indexRoute: {
-    component: Home
-  },
-  childRoutes: [
-    {
-      path: 'about',
-      component: About
-    },
-    {
-      path: 'pageOne',
-      component: PageOne
-    },
-    {
-      path: '*',
-      component: NotFound
-    }
-  ]
-}
+const routes = [
+  {
+    path: '/',
+    component: App,
+    routes: [
+      {
+        path: '/',
+        component: Home
+      },
+      {
+        path: 'about',
+        component: About
+      },
+      {
+        path: 'pageOne',
+        component: PageOne
+      },
+      {
+        path: '*',
+        component: NotFound
+      }
+    ]
+  }
+]
 
 export default routes
 

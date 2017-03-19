@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Link, withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
@@ -51,6 +51,7 @@ class App extends Component {
   }
 
   render () {
+    console.log('this.props', this.props)
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
@@ -100,4 +101,4 @@ App.propTypes = {
   children: PropTypes.object
 }
 
-export default withRouter(App)
+export default App
