@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Divider from 'material-ui/Divider'
@@ -11,6 +12,11 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import defaultLogo from 'assets/dont-know-icon.png'
+
+import Home from '../../routes/Home'
+import About from '../../routes/About'
+import PageOne from '../../routes/PageOne'
+import NotFound from '../../routes/NotFound'
 
 class App extends Component {
   constructor (props) {
@@ -50,8 +56,34 @@ class App extends Component {
     return imgStyling
   }
 
+  getCurrentChild = () => {
+    // let Child = this.props.routes.find((element) => {
+    //   if (element.path === this.props.location.pathname) {
+    //     return element.component
+    //   }
+    // })
+    let Child
+    switch (this.props.location.pathname) {
+      case '/about':
+        Child = About
+        break
+      case '/':
+        Child = Home
+        break
+      case '/pageOne':
+        Child = PageOne
+        break
+      default:
+        Child = NotFound
+    }
+    return (
+      <Child />
+    )
+  }
+
   render () {
     console.log('this.props', this.props)
+    console.log('this.props.children', this.props.children)
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
@@ -90,7 +122,7 @@ class App extends Component {
                 containerElement={<Link to='/about' />}>About</MenuItem>
             </Menu>
           </Drawer>
-          {this.props.children}
+          {this.getCurrentChild()}
         </div>
       </MuiThemeProvider>
     )
@@ -98,7 +130,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.object,
+  location: PropTypes.object
 }
 
-export default App
+export default withRouter(App)

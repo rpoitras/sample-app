@@ -14,7 +14,7 @@ class PageOne extends Component {
     return (
       <div className='column-container'>
         <h2>Page One</h2>
-        <FlatButton label='A Button' />
+        <FlatButton label='Button' />
         <br />
         <br />
         <h3>Google Icon Fonts</h3>
