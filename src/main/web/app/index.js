@@ -1,4 +1,3 @@
-import 'react-hot-loader/patch'
 import 'babel-polyfill'
 
 import ReactDOM from 'react-dom'

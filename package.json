@@ -62,7 +62,7 @@
     "build:dev": "webpack --progress --env.dev",
     "lint": "eslint --ext=jsx --ext=js ./src",
     "lint:fix": "eslint --ext=jsx --ext=js --fix ./src",
-    "start": "webpack-dev-server --host 0.0.0.0 --inline --progress --env.dev --watch-poll",
+    "start": "webpack-dev-server --host 0.0.0.0 --progress --env.dev --watch-poll",
     "test": "NODE_PATH=./src/main/web/app mocha --opts mocha.opts",
     "test:watch": "NODE_PATH=./src/main/web/app mocha --watch --opts ./src/main/web/mocha.opts",
     "yarn:install": "yarn install"

@@ -52,7 +52,15 @@ module.exports = env => {
   }
 
   webpackConfig.entry = {
-    js: ['babel-polyfill', PATHS.app],
+    js: env.prod ? [
+      'babel-polyfill',
+      PATHS.app
+    ] : [
+      'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
+      'webpack/hot/only-dev-server',
+      'babel-polyfill',
+      PATHS.app
+    ],
 
     route: PATHS.routes + '/routes.js',
 
@@ -65,13 +73,6 @@ module.exports = env => {
       'react-router-redux',
       'react-tap-event-plugin',
       'redux'
-    ]
-  }
-
-  if (env.dev) {
-    webpackConfig.entry.hmr = [
-      'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
-      'webpack/hot/only-dev-server'
     ]
   }
 
