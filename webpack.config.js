@@ -19,7 +19,7 @@ const PATHS = {
 const BASENAME = 'sample-app'
 
 // Webpack dev server port
-const DEV_SERVER_PORT = 5000
+const DEV_SERVER_PORT = 4000
 
 // host address
 const HOST = 'localhost'
