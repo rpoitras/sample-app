@@ -56,6 +56,7 @@ module.exports = env => {
       'babel-polyfill',
       PATHS.app
     ] : [
+      'react-hot-loader/patch',
       'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
       'webpack/hot/only-dev-server',
       'babel-polyfill',
