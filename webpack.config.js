@@ -19,7 +19,7 @@ const PATHS = {
 const BASENAME = 'sample-app'
 
 // Webpack dev server port
-const DEV_SERVER_PORT = 4000
+const DEV_SERVER_PORT = 5000
 
 // host address
 const HOST = 'localhost'
@@ -52,7 +52,16 @@ module.exports = env => {
   }
 
   webpackConfig.entry = {
-    js: ['babel-polyfill', PATHS.app],
+    js: env.prod ? [
+	    'babel-polyfill',
+	    PATHS.app
+    ] : [
+      'react-hot-loader/patch',
+	    'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
+	    'webpack/hot/only-dev-server',
+	    'babel-polyfill',
+	    PATHS.app
+	  ],
 
     route: PATHS.routes + '/routes.js',
 
@@ -65,13 +74,6 @@ module.exports = env => {
       'react-router-redux',
       'react-tap-event-plugin',
       'redux'
-    ]
-  }
-
-  if (env.dev) {
-    webpackConfig.entry.hmr = [
-      'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
-      'webpack/hot/only-dev-server'
     ]
   }
 
