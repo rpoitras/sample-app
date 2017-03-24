@@ -19,8 +19,7 @@ It starts up on http://localhost:8093/sample-app. This isn't necessary, but I le
 
 ## Troubles with Hot Module Replacement
 
-Make changes to some JSX while webpack dev-server is running. Changes are detected. App recompiles. 
-Browser does not update. Changes are reflected if the browser is refreshed.
+This is only a problem when using `react-router 3.0.2` in the master branch. Version 4.0.0 works fine, react-router-4 branch. Make changes to some JSX while webpack dev-server is running. Changes are detected. App recompiles. Browser does not update. Changes are reflected if the browser is refreshed.
 
 Console log:
 
