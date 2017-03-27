@@ -48,8 +48,8 @@ function renderApp (RootComponent) {
 renderApp(Root)
 
 if (module.hot) {
-  module.hot.accept(
-    './containers/Root',
-    () => renderApp(Root)
-  )
+  module.hot.accept('./containers/Root', () => {
+    const NextApp = require('./containers/Root').default
+    renderApp(NextApp)
+  })
 }
