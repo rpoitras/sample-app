@@ -11,7 +11,7 @@ import MenuItem from 'material-ui/MenuItem'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import defaultLogo from 'assets/dont-know-icon.png'
+import defaultLogo from 'assets/cool-icon.png'
 
 import Home from '../../routes/Home'
 import About from '../../routes/About'
