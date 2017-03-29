@@ -1,6 +1,6 @@
 {
   "presets": [
-    ["airbnb", {"modules": false}],
+    "airbnb",
     ["es2015", {"modules": false}],
     "react",
     "stage-2"
