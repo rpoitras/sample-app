@@ -26,7 +26,7 @@ yarn install
 yarn start
 ```
 
-## Troubles with Hot Module Replacement
+## Troubles with Hot Module Replacement - UPDATE: Fixed as of April 14/17
 
 This is only a problem when using `react-router 3.0.2` in the master branch. Version 4.0.0 works fine, react-router-4 branch.  
 
