@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router'
 import AppBar from 'material-ui/AppBar'
 import Divider from 'material-ui/Divider'
