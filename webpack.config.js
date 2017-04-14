@@ -131,22 +131,22 @@ module.exports = env => {
       {
         test: /\.css$/,
 
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: 'css-loader'
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       },
       {
         test: /\.txt$/,
-        loader: 'raw-loader'
+        use: 'raw-loader'
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)(\?.*)?$/,
-        loader: 'url-loader?limit=10000'
+        use: 'url-loader?limit=10000'
       },
       {
         test: /\.(eot|ttf|wav|mp3)(\?.*)?$/,
-        loader: 'file-loader'
+        use: 'file-loader'
       }
     ]
   }
