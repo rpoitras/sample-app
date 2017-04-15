@@ -13,10 +13,6 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import defaultLogo from 'assets/cool-icon.png'
-
-import Home from '../../routes/Home'
-import About from '../../routes/About'
-import PageOne from '../../routes/PageOne'
 import NotFound from '../../routes/NotFound'
 
 class App extends Component {
@@ -58,33 +54,16 @@ class App extends Component {
   }
 
   getCurrentChild = () => {
-    // let Child = this.props.routes.find((element) => {
-    //   if (element.path === this.props.location.pathname) {
-    //     return element.component
-    //   }
-    // })
-    let Child
-    switch (this.props.location.pathname) {
-      case '/about':
-        Child = About
-        break
-      case '/':
-        Child = Home
-        break
-      case '/pageOne':
-        Child = PageOne
-        break
-      default:
-        Child = NotFound
-    }
-    return (
-      <Child />
-    )
+    let route = this.props.routes.find((element) => {
+      if (element.path === this.props.location.pathname) {
+        return element.component
+      }
+    })
+    let Child = route ? route.component : NotFound
+    return <Child />
   }
 
   render () {
-    console.log('this.props', this.props)
-    console.log('this.props.children', this.props.children)
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div>
@@ -131,8 +110,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.object,
-  location: PropTypes.object
+  location: PropTypes.object,
+  routes: PropTypes.array
 }
 
 export default withRouter(App)

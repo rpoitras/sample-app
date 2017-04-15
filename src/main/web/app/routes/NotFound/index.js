@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { browserHistory } from 'react-router'
+import { history } from '../../index'
 
 const goBack = (e) => {
   e.preventDefault()
-  return browserHistory.goBack()
+  return history.goBack()
 }
 
 class NotFound extends Component {
@@ -16,10 +15,6 @@ class NotFound extends Component {
       </div>
     )
   }
-}
-
-NotFound.propTypes = {
-  muiTheme: PropTypes.object
 }
 
 export default NotFound

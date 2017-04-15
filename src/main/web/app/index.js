@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 const store = createStore(rootReducer, initialState, composeEnhancers(
   applyMiddleware(historyRouterMiddleware)
 ))
-const history = syncHistoryWithStore(browserHistory, store)
+export const history = syncHistoryWithStore(browserHistory, store)
 
 function renderApp (RootComponent) {
   ReactDOM.render(
