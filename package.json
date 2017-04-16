@@ -55,8 +55,8 @@
     "uglify-js": "^2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.2",
     "url-loader": "^0.5.8",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack": "2.3.3",
+    "webpack-dev-server": "2.4.2"
   },
   "main": "src/main/web/app/index.js",
   "name": "sample-app",
