@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { history } from '../../index'
+import { history } from '../../store'
 
 const goBack = (e) => {
   e.preventDefault()
