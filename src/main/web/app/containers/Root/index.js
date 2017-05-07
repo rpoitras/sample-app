@@ -46,7 +46,7 @@ export const RouteWithSubRoutes = (route) => (
  *
  * @param parentProps - the props from the calling component
  * @param subRouteParentRoute - the route path of the calling component
- * @returns {JSX} - the sub-route component, not found component, or void if input route is the current location
+ * @returns {object} - the sub-route component, not found component, or void if input route is the current location
  */
 export const children = (parentProps, subRouteParentRoute) => {
   console.log(`${subRouteParentRoute} props`, parentProps)
@@ -56,45 +56,15 @@ export const children = (parentProps, subRouteParentRoute) => {
     return
   }
 
-  // initialize the top level route, the caller's route
-  let baseRoute = subRouteParentRoute
+  // retrieve sub-route from the current location
+  let subRoute = _getSubRoute(parentProps, subRouteParentRoute)
 
-  // if this is not the top level route ('/', Home), resolve the sub-route and children
-  if (baseRoute !== parentProps.location.pathname) {
-    // assume the route is not found until detecting otherwise
-    baseRoute = '/notFound'
-
-    // split up the current location's route segments
-    const locationRouteSegments = parentProps.location.pathname.split('/')
-
-    // count the route segments, it could be an immediate sub-route [2] or a deeper nested one [2+]
-    const locationLen = locationRouteSegments.length
-
-    if (locationLen === 2) {
-      // a first level sub-route is the last segment
-      baseRoute = `/${locationRouteSegments[locationLen - 1]}`
-    } else if (locationLen > 2) {
-      // the route is deeper, split up the input top level route
-      const parentRouteSegments = subRouteParentRoute.split('/')
-
-      // for each segment of the current location
-      for (let i = 0; i < locationLen; i++) {
-        // check of the location segment matches the sub-route's highest level parent
-        if (parentRouteSegments[1] === locationRouteSegments[i]) {
-          // blank matching route segments indicate an immediate sub-route, otherwise it is deeper
-          baseRoute = parentRouteSegments[1] === ''
-              ? `/${locationRouteSegments[i + 1]}` : `/${locationRouteSegments[i]}/${locationRouteSegments[i + 1]}`
-          break
-        }
-      }
-    }
-  }
   // use the sub-routes if there are any, otherwise the top level routes
   const routes = parentProps.subRoutes ? parentProps.subRoutes : parentProps.routes
 
   // return the component assigned to the route, if found
   const route = routes.find((element) => {
-    if (element.path === baseRoute) {
+    if (element.path === subRoute) {
       return element.component
     }
   })
@@ -109,6 +79,61 @@ export const children = (parentProps, subRouteParentRoute) => {
   }
 
   return <Children subRoutes={subRoutes} {...parentProps} />
+}
+
+/**
+ * Get the sub-route from the current location in the context of the parent.
+ *
+ * TBD - the sub-route search in the location URL may be simplified with a String.indexOf(). I did it this way to avoid
+ *       matching within a segment and capturing the special meaning of the / delimeters.
+ *
+ * @param parentProps - the props from the calling component
+ * @param subRouteParentRoute - the route path of the calling component
+ * @returns {string} - the sub-route portion of the location
+ * @private
+ */
+const _getSubRoute = (parentProps, subRouteParentRoute) => {
+  // initialize the top level route, the caller's route
+  let subRoute = subRouteParentRoute
+
+  // if this is not the top level route ('/', Home), resolve the sub-route and children
+  if (subRoute !== parentProps.location.pathname) {
+    // assume the route is not found until detecting otherwise
+    subRoute = '/notFound'
+
+    // split up the current location's route segments
+    const locationRouteSegments = parentProps.location.pathname.split('/')
+
+    // count the route segments, it could be an immediate sub-route [2] or a deeper nested one [2+]
+    const locationLen = locationRouteSegments.length
+
+    if (locationLen === 2) {
+      // a first level sub-route is the last segment
+      subRoute = `/${locationRouteSegments[locationLen - 1]}`
+    } else if (locationLen > 2) {
+      // the route is deeper, split up the input top level route
+      const parentRouteSegments = subRouteParentRoute.split('/')
+
+      // for each segment of the current location
+      for (let i = 0; i < locationLen; i++) {
+        // check of the location segment matches the sub-route's highest level parent
+        if (parentRouteSegments[1] === locationRouteSegments[i]) {
+          // blank matching route segments indicate an immediate sub-route, otherwise it is deeper
+          if (parentRouteSegments[1] === '') {
+            subRoute = `/${locationRouteSegments[i + 1]}`
+          } else {
+            subRoute = `/${locationRouteSegments[i]}/${locationRouteSegments[i + 1]}`
+            // add on the rest of the path segments
+            for (let remainingIdx = i + 2; remainingIdx < locationLen; remainingIdx++) {
+              subRoute += `/${locationRouteSegments[remainingIdx]}`
+            }
+          }
+          break
+        }
+      }
+    }
+  }
+  return subRoute
 }
 
 Root.propTypes = {
