@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
 import FlatButton from 'material-ui/FlatButton'
 import FontIcon from 'material-ui/FontIcon'
 import {red500, yellow500, blue500} from 'material-ui/styles/colors'
@@ -14,13 +13,6 @@ const styles = {
 }
 
 class PageOne extends Component {
-  getCurrentChild = () => {
-    if (this.props.location.pathname === '/pageOne') {
-      return
-    }
-    return children(this.props, '/pageOne')
-  }
-
   render () {
     return (
       <div className='column-container'>
@@ -39,14 +31,10 @@ class PageOne extends Component {
           <li><Link to='/pageOne/A'>Route A</Link></li>
           <li><Link to='/pageOne/B'>Route B</Link></li>
         </ul>
-        {this.getCurrentChild()}
+        {children({...this.props}, '/pageOne')}
       </div>
     )
   }
-}
-
-PageOne.propTypes = {
-  location: PropTypes.object
 }
 
 export default PageOne

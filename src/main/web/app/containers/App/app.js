@@ -93,7 +93,7 @@ class App extends Component {
                 containerElement={<Link to='/about' />}>About</MenuItem>
             </Menu>
           </Drawer>
-          {children(this.props, '/')}
+          {children({...this.props}, '/')}
         </div>
       </MuiThemeProvider>
     )
