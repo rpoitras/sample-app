@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import reactLogo from 'assets/react.png'
 import springLogo from 'assets/springLogo.png'
 
-var style = {
+const styles = {
   imagesDiv: {
     paddingLeft: '22px'
   },
@@ -26,18 +25,18 @@ class Home extends Component {
     return (
       <div className='column-container'>
         <h1>Sample App</h1>
-        <div style={style.imagesDiv}>
+        <div style={styles.imagesDiv}>
           <span>
             <img
               src={reactLogo}
               alt='React'
-              style={style.reactImg}
+              style={styles.reactImg}
             />
             <img
               id='home-springImg'
               src={springLogo}
               alt='Spring'
-              style={style.springImg}
+              style={styles.springImg}
             />
           </span>
         </div>
@@ -51,10 +50,6 @@ class Home extends Component {
       </div>
     )
   }
-}
-
-Home.propTypes = {
-  muiTheme: PropTypes.object
 }
 
 export default Home

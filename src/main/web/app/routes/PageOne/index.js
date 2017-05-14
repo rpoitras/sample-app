@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
 import FlatButton from 'material-ui/FlatButton'
 import FontIcon from 'material-ui/FontIcon'
 import {red500, yellow500, blue500} from 'material-ui/styles/colors'
-
-import { children } from '../../containers/Root'
 
 const styles = {
   iconStyles: {
@@ -13,7 +13,12 @@ const styles = {
 }
 
 class PageOne extends Component {
+  static propTypes = {
+    route: PropTypes.object.isRequired
+  }
+
   render () {
+    const { route } = this.props
     return (
       <div className='column-container'>
         <h2>Page One</h2>
@@ -31,7 +36,7 @@ class PageOne extends Component {
           <li><Link to='/pageOne/A'>Route A</Link></li>
           <li><Link to='/pageOne/B'>Route B</Link></li>
         </ul>
-        {children({...this.props}, '/pageOne')}
+        {renderRoutes(route.routes)}
       </div>
     )
   }
