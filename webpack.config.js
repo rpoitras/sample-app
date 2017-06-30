@@ -46,6 +46,7 @@ module.exports = env => {
   }
 
   if (env.dev) {
+    process.env.BABEL_ENV = "development"
     webpackConfig.devtool = 'inline-source-map'
   } else if (ENABLE_PROD_SRC_MAPS) {
     webpackConfig.devtool = 'cheap-module-source-map'
@@ -53,15 +54,15 @@ module.exports = env => {
 
   webpackConfig.entry = {
     js: env.prod ? [
-	    'babel-polyfill',
-	    PATHS.app
+      'babel-polyfill',
+      PATHS.app
     ] : [
       'react-hot-loader/patch',
-	    'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
-	    'webpack/hot/only-dev-server',
-	    'babel-polyfill',
-	    PATHS.app
-	  ],
+      'webpack-dev-server/client?http://' + HOST + ':' + DEV_SERVER_PORT,
+      'webpack/hot/only-dev-server',
+      'babel-polyfill',
+      PATHS.app
+    ],
 
     route: PATHS.routes + '/routes.js',
 

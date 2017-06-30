@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
-import { renderRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
-
 import AppBar from 'material-ui/AppBar'
 import Divider from 'material-ui/Divider'
 import Drawer from 'material-ui/Drawer'
@@ -14,15 +11,14 @@ import MenuItem from 'material-ui/MenuItem'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-
+import Routes from '../../routes/routes'
 import defaultLogo from 'assets/cool-icon.png'
 
 class App extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-    route: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired
   }
 
   constructor (props) {
@@ -43,17 +39,20 @@ class App extends Component {
         backgroundPosition: 'left center'
       }
     }
+    this.handleRequestChange = this.handleRequestChange.bind(this)
+    this.handleHamburgerToggle = this.handleHamburgerToggle.bind(this)
+    this.getLogoStyle = this.getLogoStyle.bind(this)
   }
 
-  handleRequestChange = () => {
+  handleRequestChange () {
     this.setState({ open: false })
   }
 
-  handleHamburgerToggle = () => {
+  handleHamburgerToggle () {
     this.setState({ open: !this.state.open })
   }
 
-  getLogoStyle = () => {
+  getLogoStyle () {
     let imgStyling = {
       ...this.styles.imgDiv,
       backgroundImage: `url(${this.state.appLogo})`,
@@ -63,13 +62,10 @@ class App extends Component {
   }
 
   render () {
-    // match, location and history are unused, provided by withRouter
-    // Just wanted to have them here as an example/reminder
-    const { match, location, history, route } = this.props
+    const { match, location, history } = this.props
     console.log('App => match', match)
     console.log('App => location', location)
     console.log('App => history', history)
-    console.log('App => route,', route)
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -99,7 +95,7 @@ class App extends Component {
             <Menu>
               <MenuItem
                 onTouchTap={this.handleRequestChange}
-                containerElement={<Link to='/pageOne' />}>Page One</MenuItem>
+                containerElement={<Link to='/nestedRoute' />}>Nested Route</MenuItem>
               <Divider />
               <MenuItem
                 onTouchTap={this.handleRequestChange}
@@ -109,11 +105,11 @@ class App extends Component {
                 containerElement={<Link to='/about' />}>About</MenuItem>
             </Menu>
           </Drawer>
-          {renderRoutes(route.routes)}
+          <Routes />
         </div>
       </MuiThemeProvider>
     )
   }
 }
 
-export default withRouter(App)
+export default App

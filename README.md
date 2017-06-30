@@ -21,7 +21,7 @@ When switching between **master** and **react-router-4** branches, clean up the 
 correct dependencies.
 
 ```
-rm ./node_modules
+rm -rf ./node_modules
 yarn install
 yarn start
 ```

@@ -12,12 +12,12 @@ describe('<App />', () => {
   beforeEach(() => {
     component = shallow(
       <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <App />
+        <App history={{}} location={{}} match={{}} route={{}} />
       </MuiThemeProvider>
     )
   })
 
   it('renders', () => {
-    expect(component).to.have.length.of(1)
+    expect(component).to.have.lengthOf(1)
   })
 })
