@@ -10,7 +10,6 @@ const PATHS = {
   favicon: './src/main/web/app/favicon.ico',
   src: path.resolve(__dirname, 'src/main/web/app'),
   dist: path.resolve(__dirname, 'build/dist'),
-  routes: path.resolve(__dirname, 'src/main/web/app/routes'),
   assets: path.resolve(__dirname, 'src/main/web/app/assets'),
   react: path.resolve(__dirname, 'node_modules/react')
 }
@@ -63,8 +62,6 @@ module.exports = env => {
       'babel-polyfill',
       PATHS.app
     ],
-
-    route: PATHS.routes + '/routes.js',
 
     vendor: [
       'material-ui',
