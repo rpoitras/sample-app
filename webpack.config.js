@@ -150,6 +150,8 @@ module.exports = env => {
   }
 
   webpackConfig.plugins = [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    
     new webpack.HotModuleReplacementPlugin(),
 
     HtmlWebpackPluginConfig,
