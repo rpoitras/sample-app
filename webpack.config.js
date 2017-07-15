@@ -18,7 +18,7 @@ const PATHS = {
 const BASENAME = 'sample-app'
 
 // Webpack dev server port
-const DEV_SERVER_PORT = 4000
+const DEV_SERVER_PORT = 5000
 
 // host address
 const HOST = 'localhost'
@@ -151,7 +151,7 @@ module.exports = env => {
 
   webpackConfig.plugins = [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    
+
     new webpack.HotModuleReplacementPlugin(),
 
     HtmlWebpackPluginConfig,
